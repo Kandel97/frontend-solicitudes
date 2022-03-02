@@ -1,0 +1,33 @@
+.text-danger{
+  text-align: center;
+  margin-left: 7px;
+}
+
+body{
+  background-image:url("udenar.jpg");
+  background-size: 100%;
+  margin-top: 0%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+}
+
+#advanced-search-form{
+  background-color: #fff;
+  max-width: 800px;
+  padding: 50px;
+  color: #999999;
+  box-shadow: 3px 6px 6px 6px rgba(0,0.2,0.2,0.2);
+}
+
+
+
+
+
+
+
+
+
+
+
+

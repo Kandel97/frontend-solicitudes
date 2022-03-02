@@ -1,0 +1,51 @@
+<body class="m-0 vh-100 row justify-content-center ">
+
+  <div class="container mt-5 " id="advanced-search-form">
+    <div class="row justify-content-md-center">
+        <div class="col">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">LISTADO DE SOLICITUDES</span>
+                    <button class="btn btn-warning float-end" routerLink="/auth/solicitud">NUEVA SOLICITUD</button>
+                    <table  class ="table" *ngIf="listSolicitudes.length > 0 " class="table table-striped mt-5">
+                        <thead>
+                          <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Código</th>
+                            <th scope="col">Semestre</th>
+                            <th scope="col">Programa</th>
+                            <th scope="col">Tipo de Solicitud</th>
+                            <th scope="col">Estado</th>
+
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor=" let solicitud of listSolicitudes" >
+                            <td>{{solicitud.nombre}}</td>
+                            <td>{{solicitud.codigo}}</td>
+                            <td>{{solicitud.semestre}}</td>
+                            <td>{{solicitud.programa}}</td>
+                            <td>{{solicitud.tipo_solicitud}}</td>
+                            <!-- <td>{{solicitud.descripcion}}</td> -->
+                            <!--td><select name = "select1"  [(ngModel)]="seleccionado">
+                              <option value="item"  *ngFor="let item of lista" >{{item}}</option>
+
+                             </select></td-->
+                            <td><i [routerLink]="['/auth/estados', solicitud._id]" class="fa-solid fa-eye"></i></td>
+
+
+                            <td><i [routerLink]="['/auth/editar-solicitud', solicitud._id ]" class="fa-solid fa-pen-to-square text-primary" id="uno"></i></td>
+                            <td><i  (click)="eliminarSolicitud(solicitud._id)" class="fa-solid fa-trash text-danger"></i></td>
+
+                          </tr>
+                          </tbody>
+                      </table>
+                      <h5 style="text-align:  center; margin-top: 10px;" *ngIf="listSolicitudes.length==0">No hay solicitudes para mostrar</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
