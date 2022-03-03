@@ -10,15 +10,17 @@ import { UserI } from 'src/app/models/user';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor( private authService: AuthService,
-              private router:Router) { }
+  constructor(private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
-  
-  onRegister(form):void{
-    this.authService.register(form.value).subscribe( res=>
-      this.router.navigateByUrl('/auth/solicitud'))
+
+  onRegister(form): void {
+    this.authService.register(form.value).subscribe(res => {
+      sessionStorage.setItem("emailUser", res.dataUser.email);
+      this.router.navigateByUrl('/auth/solicitud');
+    });
   }
 
 }

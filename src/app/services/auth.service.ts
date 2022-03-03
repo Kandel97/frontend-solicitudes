@@ -12,9 +12,8 @@ export class AuthService {
   AUTH_SERVER: string = 'http://localhost:3001';
   authSubject = new BehaviorSubject(false);
   private token: string;
-  public isAdmin: boolean;
   constructor(private httpClient: HttpClient,
-              private router:Router) { }
+    private router: Router) { }
 
   register(user: UserI): Observable<JwtResponseI> {
     return this.httpClient.post<JwtResponseI>(`${this.AUTH_SERVER}/register`,
@@ -66,22 +65,16 @@ export class AuthService {
     return this.token;
   }
   //comprobar si el token existe
-  loggedIn(){
+  loggedIn() {
     return !!(localStorage.getItem("ACCESS_TOKEN"));
   }
 
-  public setIsAdmin(admin: boolean):void{
-    console.log("llegoo",admin)
+  public setIsAdmin(admin: boolean): void {
     sessionStorage.setItem("admin", String(admin));
-    this.isAdmin= Boolean(sessionStorage.getItem("admin"));
-
-
   }
 
-  public getIsAdmin(): boolean{
-    console.log("de get",this.isAdmin);
-    return Boolean(sessionStorage.getItem("admin"));
-
+  public getIsAdmin(): boolean {
+    return sessionStorage.getItem("admin") === "true" ? true : false;
   }
 
 }

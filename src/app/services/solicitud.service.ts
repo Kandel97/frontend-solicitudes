@@ -11,7 +11,11 @@ export class SolicitudService {
 
   constructor( private http:HttpClient) { }
 
-  getSolicitudes(correo: string): Observable <any> {
+  getSolicitudes(): Observable <any> {
+    return this.http.get(`${this.url}`)
+  }
+
+  getSolicitudesByEmail(correo: string): Observable <any> {
     return this.http.get(`${this.url}?correo=${correo}`)
   }
 
@@ -29,6 +33,10 @@ export class SolicitudService {
 
   editarSolicitud(id:string, solicitud:Solicitud):Observable <any>{
     return this.http.put(this.url + id , solicitud);
+  }
+
+  editarSolicitudUrlArchivo(id:string, solicitud:Solicitud):Observable <any>{
+    return this.http.put(this.url + "/urlFile/" + id , solicitud);
   }
 
   editarEstado(id:string, solicitud:Solicitud): Boolean{

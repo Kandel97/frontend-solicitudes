@@ -1,5 +1,5 @@
 export class Solicitud{
-    _id?: number;
+    _id: number;
     nombre: string;
     codigo: number;
     semestre: number;
@@ -8,6 +8,7 @@ export class Solicitud{
     descripcion: string;
     correo: string = "";
     estado: boolean= false;
+    archivoSecretariaUrl?: string;
 
 
 }
