@@ -15,6 +15,7 @@
                   <th scope="col">Semestre</th>
                   <th scope="col">Programa</th>
                   <th scope="col">Tipo de Solicitud</th>
+                  <th scope="col">Soportes</th>
                   <th scope="col">Estado</th>
 
 
@@ -27,17 +28,16 @@
                   <td>{{solicitud.semestre}}</td>
                   <td>{{solicitud.programa}}</td>
                   <td>{{solicitud.tipo_solicitud}}</td>
-                  <!-- <td>{{solicitud.descripcion}}</td> -->
-                  <!--td><select name = "select1"  [(ngModel)]="seleccionado">
-                              <option value="item"  *ngFor="let item of lista" >{{item}}</option>
-
-                             </select></td-->
+                  <td><i (click)="descargar()" class="fa-solid fa-file-pdf text-danger"></i></td>
                   <td><i (click)="getSolicitud(solicitud._id)" class="fa-solid fa-eye"></i></td>
 
 
-                  <td><i [routerLink]="['/auth/editar-solicitud', solicitud._id ]"
+                  <div *ngIf="!isAdmin">
+                    <td><i [routerLink]="['/auth/editar-solicitud', solicitud._id ]"
                       class="fa-solid fa-pen-to-square text-primary" id="uno"></i></td>
                   <td><i (click)="eliminarSolicitud(solicitud._id)" class="fa-solid fa-trash text-danger"></i></td>
+                  </div>
+
 
                 </tr>
               </tbody>

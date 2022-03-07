@@ -5,6 +5,8 @@ import { SolicitudService } from '../services/solicitud.service';
 import { EstadosComponent } from '../estados/estados.component';
 import { AuthService } from '../services/auth.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { DownloadFileService } from '../services/download-file.service';
+import {saveAs} from 'file-saver';
 
 @Component({
   selector: 'app-solicitudes',
@@ -17,10 +19,12 @@ export class SolicitudesComponent implements OnInit {
   lista: string[] = ['Recibido', 'Estudio', 'Construcción', 'Solucionado']
   seleccionado: string[] = []
   isAdmin: boolean = false;
+  private solicitud: Solicitud;
   constructor(private solicitudService: SolicitudService,
     private toastr: ToastrService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private downloadFileService: DownloadFileService
   ) { }
 
   ngOnInit(): void {
@@ -72,4 +76,11 @@ export class SolicitudesComponent implements OnInit {
     this.router.navigate(['/auth/estados', idSolicitud]);
   }
 
+  descargar() {
+    this.downloadFileService.downloadFile(this.solicitud.archivoSecretariaUrl !== undefined ? this.solicitud.archivoSecretariaUrl : '').subscribe((data) => {
+      let download = window.URL.createObjectURL(data);
+      saveAs(download);
+      console.log("descargado ", download);
+    })
+  }
 }

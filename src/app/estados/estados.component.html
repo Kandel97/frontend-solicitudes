@@ -54,7 +54,7 @@
     </div>
 
     <div *ngIf="!isAdmin" class="btn-group btn-group-toggle" data-toggle="buttons">
-      <button (click)="descargar()"  class="btn btn-secondary">Ver respuesta</button><!-- Falta programar -->
+      <button (click)="descargar()"  class="btn btn-secondary">Ver respuesta</button>
       <button [routerLink]="['/auth/solicitudes']" class="btn btn-secondary float-end">Volver</button>
     </div>
     <div class=" float-end">
