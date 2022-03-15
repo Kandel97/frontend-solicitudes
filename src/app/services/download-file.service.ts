@@ -14,9 +14,6 @@ export class DownloadFileService {
     const headers = {
         'urlFile' : urlFile,
     };
-    const requestOptions = {
-        headers: new HttpHeaders(headers),
-    };
     return this.http.get(urlApi, {responseType: 'blob', headers: headers});
   }
 

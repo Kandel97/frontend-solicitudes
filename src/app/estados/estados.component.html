@@ -53,9 +53,16 @@
 
     </div>
 
-    <div *ngIf="!isAdmin" class="btn-group btn-group-toggle" data-toggle="buttons">
+    <div *ngIf="isVerRespuestaUsuario()" class="btn-group btn-group-toggle" data-toggle="buttons">
       <button (click)="descargar()"  class="btn btn-secondary">Ver respuesta</button>
       <button [routerLink]="['/auth/solicitudes']" class="btn btn-secondary float-end">Volver</button>
+    </div>
+    <div *ngIf="!isVerRespuestaUsuario() && !isAdmin" class="btn-group btn-group-toggle" data-toggle="buttons">
+      <span style="background-color: white;"><strong>AÚN NO HAY UN ARCHIVO DE RESPUETA POR PARTE DE LA SECRETARIA</strong></span>
+      <button [routerLink]="['/auth/solicitudes']" class="btn btn-secondary float-end">Volver</button>
+    </div>
+    <div *ngIf="isAdmin" class="btn-group btn-group-toggle" data-toggle="buttons">
+      <button (click)="descargarArchivoUsuario()"  class="btn btn-secondary">Descargar archivo</button>
     </div>
     <div class=" float-end">
       <div  *ngIf="isAdmin" class="form-group ">

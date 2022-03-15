@@ -7,6 +7,8 @@ import { SolicitudService } from '../services/solicitud.service';
 import { UploadService } from '../services/upload.service';
 import {saveAs} from 'file-saver';
 
+const INVALIDS = [undefined, null, "undefined", "null", ""];
+
 @Component({
   selector: 'app-estados',
   templateUrl: './estados.component.html',
@@ -18,7 +20,7 @@ export class EstadosComponent implements OnInit {
   estado: boolean = false;
   private rol: string = "";
   id: string | null;
-  private solicitud: Solicitud;
+  private solicitud: Solicitud = new Solicitud();
   constructor(private authService: AuthService,
     private uploadService: UploadService,
     private downloadFileService: DownloadFileService,
@@ -54,6 +56,15 @@ export class EstadosComponent implements OnInit {
 
   descargar() {
     this.downloadFileService.downloadFile(this.solicitud.archivoSecretariaUrl !== undefined ? this.solicitud.archivoSecretariaUrl : '').subscribe((data) => {
+      let download = window.URL.createObjectURL(data);
+      saveAs(download);
+      console.log("descargado ", download);
+    })
+  }
+
+  descargarArchivoUsuario() {
+    this.downloadFileService.downloadFile(this.solicitud.archivoUsuarioUrl !== undefined ? this.solicitud.archivoUsuarioUrl : '').subscribe((data) => {
+      console.log("data archivo: ", data)
       let download = window.URL.createObjectURL(data);
       saveAs(download);
       console.log("descargado ", download);
@@ -101,7 +112,9 @@ export class EstadosComponent implements OnInit {
     bg2!.style.background = '#A7D2B0';
   }
 
-
+  isVerRespuestaUsuario(): boolean {
+    return !this.isAdmin && !INVALIDS.includes(this.solicitud.archivoSecretariaUrl);
+  }
 
 }
 

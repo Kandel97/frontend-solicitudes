@@ -9,6 +9,5 @@ export class Solicitud{
     correo: string = "";
     estado: boolean= false;
     archivoSecretariaUrl?: string;
-
-
+    archivoUsuarioUrl?: string;
 }

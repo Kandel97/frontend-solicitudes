@@ -22,6 +22,7 @@ export class SolicitudComponent implements OnInit {
   estado_solicitud: boolean = false;
   private isAdmin: boolean = false;
   private rol: string = "";
+  private solicitud: Solicitud = new Solicitud();
   constructor(private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
@@ -80,6 +81,7 @@ export class SolicitudComponent implements OnInit {
     } else {
       //agregar solicitud
       this.solicitudService.guardarSolicitud(SOLICITUD).subscribe(data => {
+        this.upload(data._id);
         this.toastr.success('La solicitud fue registrada con exito!', 'Solicitud Registrada');
         this.router.navigate(['/auth/solicitudes']);
       }, error => {
@@ -114,14 +116,23 @@ export class SolicitudComponent implements OnInit {
     }
   }
 
-  upload() {
+  upload(id: string) {
     let formaData = new FormData();
     formaData.append("file", this.uploadedFile[0], this.uploadedFile[0].name);
     formaData.append("codigo", this.solicitudForm.get('codigo')?.value);
     formaData.append("rol", this.rol);
     // llamar al service
-    this.uploadService.uploadFile(formaData).subscribe((res) => {
+    this.uploadService.uploadFile(formaData).subscribe((res: any) => {
+      if (res.status === 200) {
+        this.actualizarSolicitudConUrl(res.urlFile, id);
+      }
     });
+  }
+
+  actualizarSolicitudConUrl(urlFile: string, id: string) {
+    this.solicitud.archivoUsuarioUrl = urlFile;
+    this.solicitudService.editarSolicitudUrlArchivo(id, this.solicitud).subscribe((data) => {
+    })
   }
 
   onFileChange(event): any {

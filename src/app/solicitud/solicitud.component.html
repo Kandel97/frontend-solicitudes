@@ -1,93 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="solicitud.component.css">
-  </head>
-  <body>
-    <div class="container" id="advanced-search-form">
-        <form method="post" [formGroup]="solicitudForm" (ngSubmit)="agregarSolicitud()" enctype="multipart/form-data">
-                  <h3 class="titulo">{{titulo| uppercase}}</h3>
-                  <div class="mb-3" >
-                    <input type="text" formControlName="nombre"
-                      class="form-control"
-                      placeholder="Nombre del estudiante"
-                    />
-                    <div class="text-danger" *ngIf="solicitudForm.get('nombre')?.hasError('required') && solicitudForm.get('nombre')?.touched">
-                      <span>El nombre  <strong> es requerido</strong></span>
-                    </div>
-                  </div>
-                  <div class="mb-3">
-                    <input type="number"formControlName="codigo"
-                    class="form-control" placeholder="Código" />
-                    <div class="text-danger" *ngIf="solicitudForm.get('codigo')?.hasError('required') && solicitudForm.get('codigo')?.touched">
-                      <span>El código  <strong> es requerido</strong></span>
-                    </div>
-                  </div>
-                  <div class="mb-3">
-                    <input type="number" formControlName="semestre"
-                    class="form-control" placeholder="Semestre" />
-                    <div class="text-danger" *ngIf="solicitudForm.get('semestre')?.hasError('required') && solicitudForm.get('semestre')?.touched">
-                      <span>El semestre  <strong> es requerido</strong></span>
-                    </div>
-                  </div>
-                  <label class="mr-sm-2"
-                  for="inlineFormCustomSelect">Programa</label>
 
-                  <select class="form-select form-select-lg mb-3" id="inlineFormCustomSelect" formControlName="programa">
-                    <option selected>Elige una...</option>
-                    <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
-                    <option value="Ingeniería Civil">Ingeniería Civil</option>
-                    <option value="Ingeniería Electrónica">Ingeniería Electrónica</option>
-                  </select>
-                  <div class="text-danger" *ngIf="solicitudForm.get('programa')?.hasError('required') && solicitudForm.get('programa')?.touched">
-                    <span>El programa  <strong> es requerido</strong></span>
-                  </div>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="solicitud.component.css">
+</head>
 
-                  <div class="form-group">
-                    <label class="mr-sm-2 mt-3"
-                    for="inlineFormCustomSelect"
-                      >Tipo de solicitud</label
-                    >
-                    <select class="form-select form-select-lg mb-3" id="inlineFormCustomSelect" formControlName="tipo_solicitud">
-                      <option selected>Elige una...</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                      <option value="otra">Otra</option>
-                    </select>
-                    <div class="text-danger" *ngIf="solicitudForm.get('tipo_solicitud')?.hasError('required') && solicitudForm.get('tipo_solicitud')?.touched">
-                      <span>El tipo de solicitud  <strong> es requerido</strong></span>
-                    </div>
-                    <div
-                    class="form-group mt-3" >
-                      Descripción
-                      <textarea
-                        name="txtMsg"
-                        class="form-control mt-3"
-                        placeholder="Menor a 50 caracteres"
-                        style="width: 100%; height: 150px"
-                        formControlName="descripcion"
-                      >
+<body>
+  <div class="container" id="advanced-search-form">
+    <form method="post" [formGroup]="solicitudForm" (ngSubmit)="agregarSolicitud()" enctype="multipart/form-data">
+      <h3 class="titulo">{{titulo| uppercase}}</h3>
+      <div class="mb-3">
+        <input type="text" formControlName="nombre" class="form-control" placeholder="Nombre del estudiante" />
+        <div class="text-danger"
+          *ngIf="solicitudForm.get('nombre')?.hasError('required') && solicitudForm.get('nombre')?.touched">
+          <span>El nombre <strong> es requerido</strong></span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <input type="number" formControlName="codigo" class="form-control" placeholder="Código" />
+        <div class="text-danger"
+          *ngIf="solicitudForm.get('codigo')?.hasError('required') && solicitudForm.get('codigo')?.touched">
+          <span>El código <strong> es requerido</strong></span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <input type="number" formControlName="semestre" class="form-control" placeholder="Semestre" />
+        <div class="text-danger"
+          *ngIf="solicitudForm.get('semestre')?.hasError('required') && solicitudForm.get('semestre')?.touched">
+          <span>El semestre <strong> es requerido</strong></span>
+        </div>
+      </div>
+      <label class="mr-sm-2" for="inlineFormCustomSelect">Programa</label>
+
+      <select class="form-select form-select-lg mb-3" id="inlineFormCustomSelect" formControlName="programa">
+        <option selected>Elige una...</option>
+        <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
+        <option value="Ingeniería Civil">Ingeniería Civil</option>
+        <option value="Ingeniería Electrónica">Ingeniería Electrónica</option>
+      </select>
+      <div class="text-danger"
+        *ngIf="solicitudForm.get('programa')?.hasError('required') && solicitudForm.get('programa')?.touched">
+        <span>El programa <strong> es requerido</strong></span>
+      </div>
+
+      <div class="form-group">
+        <label class="mr-sm-2 mt-3" for="inlineFormCustomSelect">Tipo de solicitud</label>
+        <select class="form-select form-select-lg mb-3" id="inlineFormCustomSelect" formControlName="tipo_solicitud">
+          <option selected>Elige una...</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+          <option value="otra">Otra</option>
+        </select>
+        <div class="text-danger"
+          *ngIf="solicitudForm.get('tipo_solicitud')?.hasError('required') && solicitudForm.get('tipo_solicitud')?.touched">
+          <span>El tipo de solicitud <strong> es requerido</strong></span>
+        </div>
+        <div class="form-group mt-3">
+          Descripción
+          <textarea name="txtMsg" class="form-control mt-3" placeholder="Menor a 50 caracteres"
+            style="width: 100%; height: 150px" formControlName="descripcion">
                       </textarea>
-                      <div class="text-danger" *ngIf="solicitudForm.get('descripcion')?.hasError('required') && solicitudForm.get('descripcion')?.touched">
-                        <span> La descripción <strong> es requerida</strong></span>
-                      </div>
-                    </div>
+          <div class="text-danger"
+            *ngIf="solicitudForm.get('descripcion')?.hasError('required') && solicitudForm.get('descripcion')?.touched">
+            <span> La descripción <strong> es requerida</strong></span>
+          </div>
+        </div>
 
-                    <div>
-                      <input  (change)="onFileChange($event)" type="file">
-                    </div>
+        <div>
+          <input (change)="onFileChange($event)" type="file">
+        </div>
 
-                    <button  class="input-group-text upload"  (click)="upload()"  id="btnUpload" type="submit" [disabled]="solicitudForm.invalid" class="btn btn-success float-end">Enviar Solicitud</button>
-                  </div>
+        <button class="input-group-text upload" id="btnUpload" type="submit"
+          [disabled]="solicitudForm.invalid" class="btn btn-success float-end">Enviar Solicitud</button>
+      </div>
 
 
-              </form>
+    </form>
 
-    </div>
+  </div>
 
 </body>
+
 </html>
