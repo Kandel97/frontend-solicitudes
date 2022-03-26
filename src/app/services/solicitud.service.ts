@@ -39,6 +39,10 @@ export class SolicitudService {
     return this.http.put(this.url + "/urlFile/" + id , solicitud);
   }
 
+  actualizarEstadoSolicitud(id:string, solicitud:Solicitud):Observable <any>{
+    return this.http.put(this.url + "/actualizarEstado/" + id , solicitud);
+  }
+
   editarEstado(id:string, solicitud:Solicitud): Boolean{
 
     return Boolean(this.http.put(this.url+id, solicitud.estado))}

@@ -32,8 +32,8 @@ export class SolicitudComponent implements OnInit {
     private authService: AuthService) {
     this.solicitudForm = this.fb.group({
       nombre: ['', Validators.required],
-      codigo: ['', Validators.required],
-      semestre: ['', Validators.required],
+      codigo: ['', [Validators.required, Validators.min(1), Validators.pattern('^(0|[1-9][0-9]*)$')]],
+      semestre: ['', [Validators.required, Validators.min(1), Validators.pattern('^(0|[1-9][0-9]*)$')]],
       programa: ['', Validators.required],
       tipo_solicitud: ['', Validators.required],
       descripcion: ['', Validators.required]

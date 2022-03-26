@@ -5,7 +5,7 @@ import { AuthService } from '../services/auth.service';
 import { DownloadFileService } from '../services/download-file.service';
 import { SolicitudService } from '../services/solicitud.service';
 import { UploadService } from '../services/upload.service';
-import {saveAs} from 'file-saver';
+import { saveAs } from 'file-saver';
 
 const INVALIDS = [undefined, null, "undefined", "null", ""];
 
@@ -29,7 +29,10 @@ export class EstadosComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.aRouter.snapshot.paramMap.get('id');
-    this.solicitudService.obtenerSolicitud(this.id !== null ? this.id : "").subscribe((data) => this.solicitud = data);
+    this.solicitudService.obtenerSolicitud(this.id !== null ? this.id : "").subscribe((data) => {
+      this.solicitud = data;
+      this.pintarEstados();
+    });
     this.isAdmin = this.authService.getIsAdmin();
     this.rol = this.isAdmin ? "secretaria" : "usuario";
   }
@@ -58,58 +61,42 @@ export class EstadosComponent implements OnInit {
     this.downloadFileService.downloadFile(this.solicitud.archivoSecretariaUrl !== undefined ? this.solicitud.archivoSecretariaUrl : '').subscribe((data) => {
       let download = window.URL.createObjectURL(data);
       saveAs(download);
-      console.log("descargado ", download);
     })
   }
 
   descargarArchivoUsuario() {
     this.downloadFileService.downloadFile(this.solicitud.archivoUsuarioUrl !== undefined ? this.solicitud.archivoUsuarioUrl : '').subscribe((data) => {
-      console.log("data archivo: ", data)
       let download = window.URL.createObjectURL(data);
       saveAs(download);
-      console.log("descargado ", download);
     })
   }
 
   actualizarSolicitudConUrl(urlFile: string) {
     this.solicitud.archivoSecretariaUrl = urlFile;
     this.solicitudService.editarSolicitudUrlArchivo(this.id !== null ? this.id : "", this.solicitud).subscribe((data) => {
-      console.log("dataAct: ", data);
     })
   }
 
-  validar1() {
-    //const est:Solicitud
 
-    if (this.id !== null) {
-
-      //this.solicitudService.editarEstado(this.id,  est.estado )
-      this.estado = true
-      let bg = document.getElementById('card1');
-      bg!.style.background = '#A7D2B0';
-
-    }
-
-  }
   alerta() {
     alert('Fichero subido con exito')
 
   }
 
-  validar2() {
-    /* if(this.estado == false || true){ */
-    this.estado = true
-    let bg2 = document.getElementById('card2');
-    bg2!.style.background = '#A7D2B0';
+  cambiarEstadoSolicitud(estado: number): void {
+    if (this.id !== null) {
+      this.solicitud.estadoSolicitud = estado;
+      this.solicitudService.actualizarEstadoSolicitud(this.id, this.solicitud).subscribe((data) => {
+        this.pintarEstados();
+      });
+    }
+  }
 
-  }
-  validar3() {
-    let bg2 = document.getElementById('card3');
-    bg2!.style.background = '#A7D2B0';
-  }
-  validar4() {
-    let bg2 = document.getElementById('card4');
-    bg2!.style.background = '#A7D2B0';
+  pintarEstados(): number {
+    if (this.solicitud.estadoSolicitud) {
+      return this.solicitud.estadoSolicitud;
+    }
+    return 0;
   }
 
   isVerRespuestaUsuario(): boolean {

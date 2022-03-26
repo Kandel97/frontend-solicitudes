@@ -2,72 +2,79 @@
 
   <div class="container mt-7">
     <div class="card-group border-colapse ">
-      <div  id = "card1" class="card  mb-5 changeBG " style="width: 18rem; ">
+      <div [ngClass]="{'div-green': pintarEstados() >= 1 }" id="card1" class="card  mb-5 changeBG "
+        style="width: 18rem; ">
         <div class="card-header">
-         RECIBIDA
+          RECIBIDA
         </div>
-        <img src="https://img.icons8.com/stickers/100/000000/ok.png"/>
+        <img src="https://img.icons8.com/stickers/100/000000/ok.png" />
         <div class="card-body">
           Su solictitud a sido recibida el programa, se encuentra en espera para
           estudio
-          <div >
-            <a class="btn btn-secondary btn-sm ml-auto" (click)="validar1()" *ngIf="isAdmin">Validar</a>
+          <div>
+            <a [ngClass]="{'hide-button-validar': pintarEstados() >= 1 }" class="btn btn-secondary btn-sm ml-auto"
+              (click)="cambiarEstadoSolicitud(1)" *ngIf="isAdmin">Validar</a>
           </div>
 
         </div>
       </div>
 
-      <div id = "card2"class="card  mb-5" style="width: 18rem;">
-        <div  class="card-header">
+      <div [ngClass]="{'div-green': pintarEstados() >= 2 }" id="card2" class="card  mb-5" style="width: 18rem;">
+        <div class="card-header">
           EN ESTUDIO
         </div>
-        <img src="https://img.icons8.com/stickers/100/000000/reading.png"/>
+        <img src="https://img.icons8.com/stickers/100/000000/reading.png" />
         <div class="card-body">
           Su solciitud se encuentra en estudio, ha pasado al comité curricular para
           ser evaluada
-             <a  class="btn btn-secondary btn-sm ml-auto" (click)="validar2()" *ngIf="isAdmin">Validar</a>
+          <a [ngClass]="{'hide-button-validar': pintarEstados() >= 2 }" class="btn btn-secondary btn-sm ml-auto"
+            (click)="cambiarEstadoSolicitud(2)" *ngIf="isAdmin">Validar</a>
         </div>
       </div>
 
-      <div id = "card3"class="card  mb-5" style="width: 18rem;">
+      <div [ngClass]="{'div-green': pintarEstados() >= 3 }" id="card3" class="card  mb-5" style="width: 18rem;">
         <div class="card-header">
           EN CONSTRUCCIÓN
         </div>
-        <img src="https://img.icons8.com/stickers/100/000000/settings.png"/>
+        <img src="https://img.icons8.com/stickers/100/000000/settings.png" />
         <div class="card-body">
-        Su solicitud ha sido evaluada y se encuentra en etapa de contrucció para brinda respuesta
-             <a class="btn btn-secondary btn-sm ml-auto" (click)="validar3()" *ngIf="isAdmin">Validar</a>
+          Su solicitud ha sido evaluada y se encuentra en etapa de contrucció para brinda respuesta
+          <a [ngClass]="{'hide-button-validar': pintarEstados() >= 3 }" class="btn btn-secondary btn-sm ml-auto"
+            (click)="cambiarEstadoSolicitud(3)" *ngIf="isAdmin">Validar</a>
         </div>
       </div>
 
-      <div id = "card4"class="card  mb-5" style="width: 18rem;">
-        <div  class="card-header">
+      <div [ngClass]="{'div-green': pintarEstados() >= 4 }" id="card4" class="card  mb-5" style="width: 18rem;">
+        <div class="card-header">
           RESUELTA
         </div>
-        <img src="https://img.icons8.com/stickers/100/000000/ok-hand-skin-type-1.png"/>
-         <div class="card-body">
-        Su solicitud ha sido respondida, por favor dar click en ver respuesta para mas detalles
-        <a class="btn btn-secondary btn-sm ml-auto"(click)="validar4()" *ngIf="isAdmin">Validar</a>
+        <img src="https://img.icons8.com/stickers/100/000000/ok-hand-skin-type-1.png" />
+        <div class="card-body">
+          Su solicitud ha sido respondida, por favor dar click en ver respuesta para mas detalles
+          <a [ngClass]="{'hide-button-validar': pintarEstados() >= 4 }" class="btn btn-secondary btn-sm ml-auto"
+            (click)="cambiarEstadoSolicitud(4)" *ngIf="isAdmin">Validar</a>
         </div>
       </div>
 
     </div>
 
     <div *ngIf="isVerRespuestaUsuario()" class="btn-group btn-group-toggle" data-toggle="buttons">
-      <button (click)="descargar()"  class="btn btn-secondary">Ver respuesta</button>
+      <button (click)="descargar()" class="btn btn-secondary">Ver respuesta</button>
       <button [routerLink]="['/auth/solicitudes']" class="btn btn-secondary float-end">Volver</button>
     </div>
     <div *ngIf="!isVerRespuestaUsuario() && !isAdmin" class="btn-group btn-group-toggle" data-toggle="buttons">
-      <span style="background-color: white;"><strong>AÚN NO HAY UN ARCHIVO DE RESPUETA POR PARTE DE LA SECRETARIA</strong></span>
+      <span style="background-color: white;"><strong>AÚN NO HAY UN ARCHIVO DE RESPUETA POR PARTE DE LA
+          SECRETARIA</strong></span>
       <button [routerLink]="['/auth/solicitudes']" class="btn btn-secondary float-end">Volver</button>
     </div>
     <div *ngIf="isAdmin" class="btn-group btn-group-toggle" data-toggle="buttons">
-      <button (click)="descargarArchivoUsuario()"  class="btn btn-secondary">Descargar archivo</button>
+      <button (click)="descargarArchivoUsuario()" class="btn btn-secondary">Descargar archivo</button>
     </div>
     <div class=" float-end">
-      <div  *ngIf="isAdmin" class="form-group ">
+      <div *ngIf="isAdmin && pintarEstados() === 4" class="form-group ">
         <input class="btn" (change)="onFileChange($event)" type="file">
-        <button  class="input-group-text upload" (click)="upload()"  id="btnUpload" type="submit"  class="btn btn-success">Subir Respuesta</button>
+        <button class="input-group-text upload" (click)="upload()" id="btnUpload" type="submit"
+          class="btn btn-success">Subir Respuesta</button>
       </div>
     </div>
 

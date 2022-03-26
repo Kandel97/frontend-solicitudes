@@ -10,4 +10,5 @@ export class Solicitud{
     estado: boolean= false;
     archivoSecretariaUrl?: string;
     archivoUsuarioUrl?: string;
+    estadoSolicitud?: number;
 }

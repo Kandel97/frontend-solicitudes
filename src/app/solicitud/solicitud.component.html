@@ -20,14 +20,16 @@
         </div>
       </div>
       <div class="mb-3">
-        <input type="number" formControlName="codigo" class="form-control" placeholder="Código" />
+        <input min="0" pattern="^[0-9]" type="number" formControlName="codigo" class="form-control"
+          placeholder="Código" />
         <div class="text-danger"
           *ngIf="solicitudForm.get('codigo')?.hasError('required') && solicitudForm.get('codigo')?.touched">
           <span>El código <strong> es requerido</strong></span>
         </div>
       </div>
       <div class="mb-3">
-        <input type="number" formControlName="semestre" class="form-control" placeholder="Semestre" />
+        <input type="number" min="0" pattern="^[0-9]" formControlName="semestre" class="form-control"
+          placeholder="Semestre" />
         <div class="text-danger"
           *ngIf="solicitudForm.get('semestre')?.hasError('required') && solicitudForm.get('semestre')?.touched">
           <span>El semestre <strong> es requerido</strong></span>
@@ -36,10 +38,11 @@
       <label class="mr-sm-2" for="inlineFormCustomSelect">Programa</label>
 
       <select class="form-select form-select-lg mb-3" id="inlineFormCustomSelect" formControlName="programa">
-        <option selected>Elige una...</option>
-        <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
-        <option value="Ingeniería Civil">Ingeniería Civil</option>
-        <option value="Ingeniería Electrónica">Ingeniería Electrónica</option>
+        <optgroup label="Elige una...">
+          <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
+          <option value="Ingeniería Civil">Ingeniería Civil</option>
+          <option value="Ingeniería Electrónica">Ingeniería Electrónica</option>
+        </optgroup>
       </select>
       <div class="text-danger"
         *ngIf="solicitudForm.get('programa')?.hasError('required') && solicitudForm.get('programa')?.touched">
@@ -49,11 +52,12 @@
       <div class="form-group">
         <label class="mr-sm-2 mt-3" for="inlineFormCustomSelect">Tipo de solicitud</label>
         <select class="form-select form-select-lg mb-3" id="inlineFormCustomSelect" formControlName="tipo_solicitud">
-          <option selected>Elige una...</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-          <option value="otra">Otra</option>
+          <optgroup label="Elige una...">
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+            <option value="otra">Otra</option>
+          </optgroup>
         </select>
         <div class="text-danger"
           *ngIf="solicitudForm.get('tipo_solicitud')?.hasError('required') && solicitudForm.get('tipo_solicitud')?.touched">
@@ -74,8 +78,8 @@
           <input (change)="onFileChange($event)" type="file">
         </div>
 
-        <button class="input-group-text upload" id="btnUpload" type="submit"
-          [disabled]="solicitudForm.invalid" class="btn btn-success float-end">Enviar Solicitud</button>
+        <button class="input-group-text upload" id="btnUpload" type="submit" [disabled]="solicitudForm.invalid"
+          class="btn btn-success float-end">Enviar Solicitud</button>
       </div>
 
 
